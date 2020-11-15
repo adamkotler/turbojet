@@ -1,7 +1,0 @@
-function[P_06,P_star,T_06,V_e,c_p6,gamma_6] = nozzle(P_04,P_0a,T_04,n_n,Rs)
-    P_06=P_04;
-    T_06=T_04;
-    [c_p6,gamma_6]=cp(T_06,Rs);
-    V_e=sqrt(2.*c_p6.*n_n.*T_06.*(1-((P_0a./P_06).^((gamma_6-1)./(gamma_6)))));
-    P_star=P_06.*(1+((1-gamma_6)./(n_n.*(1+gamma_6))));
-end

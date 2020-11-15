@@ -6,16 +6,20 @@ Rs=.287;%[kJ/kgK]
 str=input("Select Program: 'Ramjet' 'Turbojet' ",'s');
 %%
 %Initialize Parameters
-M=2.0;%Mach Number
-P_a=101325;%[Pa]
-T_a=288.2;%[K]
-T_04=1666.5;%[K]
-    [cp_a,gamma_a]=cp(T_a,Rs)
-pi_d=0.8;%diffuser pressure ratio
+M=.86;%Mach Number
+P_a=18750;%[Pa]
+T_a=216.7;%[K]
+T_04=1700;%[K]
+    [cp_a,gamma_a]=cp(T_a,Rs);
+pi_d=0.97;%diffuser pressure ratio
 pi_b=0.95;%burner pressure ratio
-n_b=0.91;%burner efficiency
-n_n=0.92;%nozzle efficiency
-dh=43000;%delta-enthalpy across burner
+n_b=0.96;%burner efficiency
+n_n=0.98;%nozzle efficiency
+dh=45000;%delta-enthalpy across burner
+pi_c=30;%compressor pressure ratio
+n_c=.85;%compressor efficiency
+n_t=.9;%turbine efficiency
+n_m=0.99;%mechanical losses
 
 if(strcmp(str,"Ramjet"))
     noz_bool=input("Select Nozzle: 'C' 'C+D' ",'s');
@@ -43,6 +47,13 @@ if(strcmp(str,"Ramjet"))
         CONVERGING_DIVERGING_TABLE=cell2table(dat,'VariableNames',header)
     end
 else
-    t=0;
+        [P_0a,P_02,T_0a,T_02]=diffuser(P_a,T_a,gamma_a,M,pi_d);
+        [P_03,T_03,c_pc,gamma_c]=compressor(P_02,T_02,pi_c,n_c,Rs);
+%         %Output results for strictly converging nozzle
+%         header={'MATLAB/CLASS','P_0a[Pa]','T_0a[K]','f[-]','P*[Pa]','V_exit[m/s]'};
+%         mat_dat={'MATLAB',P_0a,T_0a,f,P_star,V_e};
+%         class_dat={'CLASS',792,518,.0315,299,1108};
+%             dat=vertcat(mat_dat,class_dat);
+%         CONVERGING_DIVERGING_TABLE=cell2table(dat,'VariableNames',header)
 end
  
