@@ -1,0 +1,8 @@
+function[P_0a,P_02,T_0a,T_02] = diffuser(Pa,k,M,pi_d)
+    %%
+    %Evaluate total pressure
+    P_0a=Pa.*(1+(0.5.*(k-1).*M.^2)).^(k./(k-1));
+    P_02=P_0a.*pi_d;
+    %%
+    %Evaluate total temperature
+end

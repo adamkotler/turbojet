@@ -1,0 +1,9 @@
+function[f,P_03,P_04,c_p3,c_p4,c_pav,gamma_3,gamma_4]=burner(P_02,T_02,T_04,pi_b,n_b,dh,Rs)
+    P_03=P_02;
+    P_04=P_03.*pi_b;
+    T_03=T_02;
+    [c_p3,gamma_3]=cp(T_03,Rs);
+    [c_p4,gamma_4]=cp(T_04,Rs);
+    c_pav=(c_p3+c_p4)./2;
+    f=((c_pav.*T_03)-(c_pav.*T_04))./((c_pav.*T_04)-(n_b.*dh));
+end
