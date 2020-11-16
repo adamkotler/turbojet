@@ -1,9 +1,7 @@
-function[f,P_03,P_04,c_p3,c_p4,c_pav,gamma_3,gamma_4]=burner(P_02,T_02,T_04,pi_b,n_b,dh,Rs)
-    P_03=P_02;
+function[P_04,T_04,c_p4,gamma_4]=burner(P_03,T_03,pi_b,n_b,dh,c_pc,gamma_c,f,Rs)
     P_04=P_03.*pi_b;
-    T_03=T_02;
-    [c_p3,gamma_3]=cp(T_03,Rs);
-    [c_p4,gamma_4]=cp(T_04,Rs);
-    c_pav=(c_p3+c_p4)./2;
-    f=((c_pav.*T_03)-(c_pav.*T_04))./((c_pav.*T_04)-(n_b.*dh));
+    [c_p4,gamma_4]=cp((T_03+1700)./2,Rs);
+    T_04=((c_pc.*1000.*T_03+n_b.*dh.*1000)./(1+(1./f)))./(c_p4.*1000);
+    T_04=1700;
+%     fprintf("%f",f);
 end
